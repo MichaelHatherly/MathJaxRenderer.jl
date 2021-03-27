@@ -1,6 +1,6 @@
 module MathJaxRenderer
 
-using Artifacts, Librsvg_jll, NodeJS, JSON
+using Artifacts, Librsvg_jll, NodeJS, JSON3
 
 export Math
 
@@ -113,16 +113,16 @@ function svg_converter(
     width = 80em,
     kws...,
 )
-    conf = Dict(
-        :src => f.src,
-        :config => Dict(
-            :display => !inline,
-            :em => em,
-            :ex => ex,
-            :containerWidth => width,
+    conf = (
+        src = f.src,
+        config = (
+            display = !inline,
+            em = em,
+            ex = ex,
+            containerWidth = width,
         ),
     )
-    str = take!(check(exec(mathjax(), JSON.json(conf))).io)
+    str = take!(check(exec(mathjax(), JSON3.write(conf))).io)
     return IOBuffer(extract_svg(str))
 end
 
