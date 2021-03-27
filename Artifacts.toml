@@ -1,6 +1,6 @@
 [mathjax]
-git-tree-sha1 = "2eef8ad269444767db7d2c0cae6b2d88f7c99ab1"
+git-tree-sha1 = "0e364cc558017a17411d0d90b2e155cd34995721"
 
     [[mathjax.download]]
-    sha256 = "0fa488b235775d53b2b61619fa580134adc584f5836c8ad319257f5b2942f9c2"
+    sha256 = "8bae9ed7a83eb2f2caf6cb9ef18759c1432687cdd81cc974174b27d4896064dd"
     url = "https://github.com/MichaelHatherly/MathJaxRenderer.jl/releases/download/0.1.0/mathjaxrenderer-0.1.0.tar.gz"
