@@ -88,7 +88,8 @@ mimetype(::Val{s}) where s = error("unknown format '$s'.")
 
 Base.show(io::IO, mime::SUPPORTED_MIMES, d::Math; kws...) = write(io, converter(d, mime; kws...))
 
-mathjax() = `$(nodejs_cmd()) $(joinpath(artifact"mathjax", "index.js"))`
+mathjax_bin() = joinpath(artifact"mathjax", "index.js")
+mathjax() = `$(nodejs_cmd()) $(mathjax_bin())`
 
 function exec(cmd::Cmd, input::IOBuffer)
     output, errors = IOBuffer(), IOBuffer()
