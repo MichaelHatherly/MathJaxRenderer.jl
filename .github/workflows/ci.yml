@@ -12,7 +12,7 @@ jobs:
         version:
           - '1.4'
           - '1.5'
-          - '1.6'
+          # - '1.6' # Windows 1.6 fails with `permission denied (EACCES)` when calling node. Only happens on gha.
           - 'nightly'
         os:
           - ubuntu-latest
