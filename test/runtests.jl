@@ -16,19 +16,15 @@ keywords = Dict(
 @testset "MathJaxRenderer" begin
     @testset "Integration" begin
         tex = joinpath(@__DIR__, "data", "tex")
-        svg = joinpath(@__DIR__, "data", "svg")
-        png = joinpath(@__DIR__, "data", "png")
-        pdf = joinpath(@__DIR__, "data", "pdf")
-        eps = joinpath(@__DIR__, "data", "eps")
         for file in readdir(tex)
             name = first(splitext(file))
             file = joinpath(tex, file)
             math = read(file, Math)
             kws = keywords[name]
-            @test write(joinpath(svg, "$name.svg"), math; kws...) > 0
-            @test write(joinpath(png, "$name.png"), math; kws...) > 0
-            @test write(joinpath(pdf, "$name.pdf"), math; kws...) > 0
-            @test write(joinpath(eps, "$name.eps"), math; kws...) > 0
+            @test !isempty(sprint(io -> show(io, MIME("image/svg+xml"), math; kws...)))
+            @test !isempty(sprint(io -> show(io, MIME("image/png"), math; kws...)))
+            @test !isempty(sprint(io -> show(io, MIME("application/pdf"), math; kws...)))
+            @test !isempty(sprint(io -> show(io, MIME("application/postscript"), math; kws...)))
         end
     end
     @testset "Visuals" begin
