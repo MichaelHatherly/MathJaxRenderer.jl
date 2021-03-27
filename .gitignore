@@ -1,0 +1,7 @@
+/node_modules
+/test/data/eps
+/test/data/pdf
+/test/data/png
+/test/data/svg
+/build
+/Manifest.toml

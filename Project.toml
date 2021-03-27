@@ -1,0 +1,19 @@
+name = "MathJaxRenderer"
+uuid = "c4602970-9bd6-4912-867b-6b19c60f5024"
+authors = ["Mike <michaelhatherly@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Artifacts = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+Librsvg_jll = "925c91fb-5dd6-59dd-8e8c-345e74382d89"
+NodeJS = "2bd173c7-0d6d-553b-b6af-13a54713934c"
+
+[extras]
+FileIO = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
+ImageMagick = "6218d12a-5da1-5696-b52f-db25d2ecc6d1"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+VisualRegressionTests = "34922c18-7c2a-561c-bac1-01e79b2c4c92"
+
+[targets]
+test = ["ImageMagick", "FileIO", "Test", "VisualRegressionTests"]
