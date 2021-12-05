@@ -4,11 +4,13 @@ using Test, MathJaxRenderer, VisualRegressionTests
 
 keywords = Dict(
     "small" => (
-        zoom = 4,
+        x_zoom = 4,
+        y_zoom = 4,
         background_color = :orange,
     ),
     "large" => (
-        zoom = 2,
+        x_zoom = 2,
+        y_zoom = 2,
         background_color = :lightblue,
     ),
 )
@@ -28,9 +30,9 @@ keywords = Dict(
         end
     end
     @testset "Visuals" begin
-        testfun = (filename) -> write(filename, Math("\\frac{1}{1 + x}"); zoom = 5)
-        @visualtest testfun joinpath(@__DIR__, "data/references/fraction.png") tol = 0.2
-        testfun = (filename) -> write(filename, Math("\\begin{align}\n3.29e+07 =& 1.23e+00 =& P_{1} \\\\\n\\frac{x}{y} =& 1.00e+10 =& 1.29e+03\n\\end{align}"); zoom = 5)
-        @visualtest testfun joinpath(@__DIR__, "data/references/align.png") tol = 0.2
+        testfun = (filename) -> write(filename, Math("\\frac{1}{1 + x}"); x_zoom = 5, y_zoom = 5)
+        @visualtest testfun joinpath(@__DIR__, "data/references/fraction.png") popup = false tol = 0.2
+        testfun = (filename) -> write(filename, Math("\\begin{align}\n3.29e+07 =& 1.23e+00 =& P_{1} \\\\\n\\frac{x}{y} =& 1.00e+10 =& 1.29e+03\n\\end{align}"); x_zoom = 5, y_zoom = 5)
+        @visualtest testfun joinpath(@__DIR__, "data/references/align.png") popup = false tol = 0.2
     end
 end

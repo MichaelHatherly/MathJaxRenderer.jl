@@ -28,10 +28,10 @@ either `show` or `write`:
       - `dpi_y = 90`, pixels per inch (vertical).
       - `x_zoom = 1.0`, zoom factor (horizontal).
       - `y_zoom = 1.0`, zoom factor (vertical).
-      - `zoom = 1.0`, zoom factor (both horizontal and vertical).
       - `keep_aspect_ratio = false`, whether to preserve the aspect ratio.
       - `background_color = :white`, set the background color, CSS color names and syntax.
       - `unlimited = false`, allow for huge SVG files.
+      - `rsvg_convert_bin = nothing`, use custom rsvg_convert binary (nothing uses Librsvg_jll binary)
 
 When writing to file with `write` the follow extensions are supported:
 
@@ -126,6 +126,7 @@ function svg_converter(
     return IOBuffer(extract_svg(str))
 end
 
+
 function converter(
     f::Math,
     m::SUPPORTED_MIMES;
@@ -133,14 +134,16 @@ function converter(
     dpi_y = 90,
     x_zoom = 1.0,
     y_zoom = 1.0,
-    zoom = 1.0,
     keep_aspect_ratio = false,
     background_color = :white,
     unlimited = false,
+    rsvg_convert_bin = nothing,
     kws...,
 )
     Librsvg_jll.rsvg_convert() do bin
-        ext = extension(m)
+        if !isnothing(rsvg_convert_bin) && !isnothing(Sys.which(rsvg_convert_bin))
+            bin = rsvg_convert_bin
+        end
         cmd = [
             bin,
             "--format=$(extension(m))",
@@ -148,7 +151,6 @@ function converter(
             "--dpi-y=$dpi_y",
             "--x-zoom=$x_zoom",
             "--y-zoom=$y_zoom",
-            "--zoom=$zoom",
             "--background-color=$background_color",
         ]
         keep_aspect_ratio && push!(cmd, "--keep-aspect-ratio")
