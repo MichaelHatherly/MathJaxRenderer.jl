@@ -31,7 +31,7 @@ either `show` or `write`:
       - `keep_aspect_ratio = false`, whether to preserve the aspect ratio.
       - `background_color = :white`, set the background color, CSS color names and syntax.
       - `unlimited = false`, allow for huge SVG files.
-      - `rsvg_convert_bin = ""`, use custom rsvg_convert binary (an empty string uses Librsvg_jll binary)
+      - `rsvg_convert_bin = nothing`, use custom rsvg_convert binary (nothing uses Librsvg_jll binary)
 
 When writing to file with `write` the follow extensions are supported:
 
@@ -137,11 +137,11 @@ function converter(
     keep_aspect_ratio = false,
     background_color = :white,
     unlimited = false,
-    rsvg_convert_bin = "",
+    rsvg_convert_bin = nothing,
     kws...,
 )
     Librsvg_jll.rsvg_convert() do bin
-        if !isempty(rsvg_convert_bin)
+        if !isnothing(rsvg_convert_bin) && !isnothing(Sys.which(rsvg_convert_bin))
             bin = rsvg_convert_bin
         end
         cmd = [
