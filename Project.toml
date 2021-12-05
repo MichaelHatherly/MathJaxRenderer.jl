@@ -1,7 +1,7 @@
 name = "MathJaxRenderer"
 uuid = "c4602970-9bd6-4912-867b-6b19c60f5024"
 authors = ["Mike <michaelhatherly@gmail.com>"]
-version = "0.1.0"
+version = "0.2.0"
 
 [deps]
 Artifacts = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
